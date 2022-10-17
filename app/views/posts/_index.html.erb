@@ -1,0 +1,39 @@
+<%= link_to "Create post", new_user_group_post_path(current_user, @group), class: "btn btn-outline-success" %>
+<% x = @group.users %>
+<hr>
+<i class="fa-solid fa-user">
+  <% if @group.check_group_admin(current_user) %>
+    Group Admin
+  <% else %>
+    Group Member
+  <% end %>
+</i>
+<% i = 0 %>
+<div class="container d-flex flex-wrap align-items-center">
+
+  <% @post.each do | post | %>
+    <% if can? :create, Group %>
+      <div class="cards" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="id"><%= post.id %></h5>
+          <p><%= post.title %></p>
+          <p><%= post.description %></p>
+          <small>Created by: <%= post.user.email %></small>
+          <%= link_to "show", user_group_post_path(current_user, @group, post), class: "btn btn-outline-success" %>
+        </div>
+      </div>
+    <% else %>
+      <% if post.post_type == false %>
+        <div class="cards" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="id"><%= post.id %></h5>
+            <p><%= post.title %></p>
+            <p><%= post.description %></p>
+            <small>Created by: <%= post.user.email %></small>
+            <%= link_to "show", user_group_post_path(current_user, @group, post), class: "btn btn-outline-success" %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

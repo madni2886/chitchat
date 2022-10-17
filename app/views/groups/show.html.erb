@@ -1,0 +1,16 @@
+<% if @group.check_group_admin(current_user) %>
+  <% request_count = @group.pending_req_count %>
+  <%= link_to "Pending request", show_request_user_group_path(current_user, @group), class: "btn btn-outline-success" %>
+  <span class="badge badge-pill badge-danger"><%= request_count %></span>
+  </span>
+
+  <% share_link = @group.generate_url(current_user) %>
+  <%#x=CGI.escape(share_link)%>
+  <button class="btn btn-outline-success" id="copy-button" onclick="myFunction()" data-clipboard-text=<%= share_link %>>
+    <i class="fa-light fa-share">
+      Share Group Link
+    </i>
+  </button>
+<% end %>
+
+<%= render 'posts/index' %>

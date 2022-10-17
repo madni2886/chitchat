@@ -1,0 +1,17 @@
+<strong>Title:</strong> <%= best_in_place [current_user, @group, @post], :title, :as => :textarea %><br>
+<strong>Description: </strong> <%= @post.description %></p></div>
+<hr>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<strong>
+  Comments:
+</strong>
+<div id="com">
+
+  <% @comments = @post.comments %>
+  <% @comments.each do | comment | %>
+    <%= render 'comments/content', comment: comment %>
+  <% end %>
+</div>
+<%= render 'comments/form', content: @post.comments.create, remote: true %>
+
+

@@ -1,0 +1,66 @@
+<h1 class="center">Groups</h1>
+<% if can? :create, Group %>
+  <%= link_to "Create Group", new_user_group_path(current_user), class: "btn btn-outline-success" %>
+<% end %>
+</h1>
+<hr>
+<div class="flex_products">
+
+  <% @groups.each do | group | %>
+
+    <% check_request = group.check_request_status(current_user) %>
+
+    <div class="products" ,style=" border-radius: 25px;background: #73AD21;border: 2px solid #73AD21;">
+      <% if group.image.attached? %>
+        <div class="title">
+          <%= group.title %>(<%= group.group_type %>)
+
+        </div>
+        <div class="con">
+          <%= image_tag group.image, class: "image" %>
+      <% else %>
+        <div class="title">
+          <%= group.title %>
+        </div>
+      <% end %>
+
+      <div class="middle">
+        <div class="text">
+          <small>Created by: <%= group.users[0].email %>,
+            <%= time_ago_in_words(group.created_at) %> ago,<br>
+            last updated: <%= time_ago_in_words(group.updated_at) %> ago</small>
+        </div>
+      </div>
+      </div>
+      <div class="Button">
+        <% if check_request || group.group_type == "public" %>
+
+          <p class="center"> Visit and enjoy</p>
+        <% else %>
+          <% if check_request!= nil && !check_request %>
+            <p class="center">Request is pending</p>
+          <% else %>
+            <p class="center">Not followed yet</p>
+          <% end %>
+        <% end %>
+        <% if check_request == true || group.group_type == "public" %>
+          <%= link_to "SHOW", user_group_path(current_user, group), class: "btn btn-outline-success" %>
+        <% end %>
+
+        <% if group.get_group_admin.id == current_user.id %>
+          <%= link_to "Edit", edit_user_group_path(current_user, group), class: "btn btn-outline-success", style: "margin:18px;" %>
+        <% end %>
+        <% member = Membership.find_by(user_id: current_user.id, group_id: group.id) %>
+        <% if member == nil %>
+          <%= link_to link_to "Join", join_user_group_path(current_user, group),
+                              class: "btn btn-outline-success" %>
+        <% end %>
+
+      </div>
+    </div>
+  <% end %>
+
+</div>
+<div style="align-content: center">
+  <%= paginate @groups %>
+</div>

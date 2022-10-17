@@ -1,0 +1,101 @@
+// Place all the styles related to the Groups controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.center {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+}
+
+.flex_products {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.con:hover .image {
+  transform: scale(1.1);
+  opacity: 0.3;
+}
+
+
+.con:hover .middle {
+  opacity: 1;
+}
+
+.image {
+  width: 250px;
+  height: 300px;
+  border-radius: 10%;
+  opacity: 1;
+  display: block;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.products {
+  padding: 30px;
+
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  width: 250px;
+  font-weight: bold;
+  color: #2E2F30;
+  font-size: 18px;
+
+}
+
+.desc {
+  display: flex;
+  width: 250px;
+  font-size: 16px;
+  flex-wrap: wrap;
+
+}
+
+.user_image {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  left: 70px;
+  border-radius: 70%;
+  width: 200px;
+  height: 150px;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+
+  transform: translate(-5%, -300%);
+  -ms-transform: translate(-50%, -50%);
+  backface-visibility: hidden;
+}
+
+
+.text {
+  background-color: black;
+  color: white;
+  font-size: 16px;
+
+
+}
+
+.Button {
+  margin: 10px;
+  padding: 20px;
+  position: center;
+}
+.badge {
+  position: relative;
+  top: -25px;
+  left: -25px;
+  border: 1px solid black;
+  background-color: #B00100;
+  border-radius: 50%;
+}
